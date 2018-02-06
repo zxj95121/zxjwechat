@@ -842,10 +842,48 @@ class Weixin{
 		}
 		return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	}
+
+	/* 获取js所有参数 */
 	function getJsApiTicket(){
-		$url='https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$this->getAccesstoken()['access_token'].'&type=jsapi';
-		return json_decode(file_get_contents($url),true);
+		
+		
+		/* 第一步：getJsApiTicket */
+		//-------------------------获取缓存中的jsapi_ticket为$this->jsapi_ticket-----
+		$account=$this->account->where('id',$this->account_id)->find();
+		if($account['jsapi_ticket_overdue_time']>time()){
+			$this->jsapi_ticket=json_decode($account['jsapi_ticket'],true);
+		}
+		//-------------------------------------------------------
+		if(!@$this->jsapi_ticket){
+			$url='https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$this->getAccesstoken()['access_token'].'&type=jsapi';
+			$this->jsapi_ticket=json_decode(file_get_contents($url),true);
+			//------------------------保存 $this->jsapi_ticket 为缓存----------------
+			if($this->jsapi_ticket['ticket']){
+				$data['jsapi_ticket']=json_encode($this->jsapi_ticket);
+				$data['jsapi_ticket_overdue_time']=time()+4000;
+				$this->account->where('id',$this->account_id)->update($data);
+			}
+			//------------------------保存 $this->jsapi_ticket 为缓存----------------
+		}
+
+		$jsapi_ticket = $this->jsapi_ticket['ticket'];
+
+		/* 第二步：获取jsapi_config */
+		$data['noncestr']=$this->getRandomString(16);
+		$data['jsapi_ticket']=$jsapi_ticket;
+		$data['url']=$this->getThisUrl();
+		$data['timestamp']=time();
+		ksort($data);
+		$url='';
+		foreach($data as $k=>$v){
+			$url.=$k.'='.$v.'&';
+		}
+		$data['signature']=sha1(trim($url,'&'));
+		$data['appid']=$this->AppID;
+
+		return $data;
 	}
+	/* 获取jsapiconfig，已废弃 */
 	function getJsApiConfig($jsapi_ticket){
 		$data['noncestr']=$this->getRandomString(16);
 		$data['jsapi_ticket']=$jsapi_ticket;
