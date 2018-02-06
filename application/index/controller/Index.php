@@ -22,6 +22,6 @@ class Index extends Backend
         $config = $weixin->getJsApiTicket();
         
         $this->assign('config', $config);
-        return view('index');
+        return $this->fetch('/index');
     }
 }
