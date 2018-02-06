@@ -6,6 +6,7 @@
     <title>JSSDK样例</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/ui/bootstrap/css/bootstrap.min.css">
+    <link href="/ui/layui/css/layui.css" rel="stylesheet">
     <style>
         button{
             cursor: pointer;
@@ -15,20 +16,22 @@
         }
         .row_div div{
             line-height: 38px;
+            text-align: right;
         }
     </style>
 </head>
 <body>
     <div class="row row_div">
-        <div class="col-sm-1 offset-sm-1">1、</div>
-        <button id="scan" class="btn btn-success col-sm-6">点击扫描二维码</button>
+        <div class="col-sm-1 offset-sm-1 offset-xs-2">1、</div>
+        <button id="scan" class="btn btn-success col-sm-6 col-xs-8">点击扫描二维码</button>
     </div>
     <div class="row row_div">
-        <div class="col-sm-1 offset-sm-1">2、</div>
-        <button id="share" class="btn btn-success col-sm-6">分享到朋友圈</button>
+        <div class="col-sm-1 offset-sm-1 offset-xs-2">2、</div>
+        <button id="share" class="btn btn-success col-sm-6 col-xs-8">分享到朋友圈</button>
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="/ui/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/ui/layui/layui.all.js"></script>
     <script>
         
         wx.config({
@@ -38,7 +41,8 @@
             nonceStr: '{$config['noncestr']}', // 必填，生成签名的随机串
             signature: '{$config['signature']}',// 必填，签名
             jsApiList: [
-                'scanQRCode'
+                'scanQRCode',
+                'onMenuShareTimeline'
             ] // 必填，需要使用的JS接口列表
         });
 
@@ -55,6 +59,21 @@
                         //  window.location.href=result;
                     }
                 });
+            })
+
+            $('#share').click(function(){
+                wx.onMenuShareTimeline({
+                    title: '分享到朋友圈', // 分享标题
+                    link: 'http://small.zhangxianjian.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: 'https://mmbiz.qpic.cn/mmbiz_gif/a5Us7rpWGGqvn9HY2OoTC61CX0VzUreibuDkrEvrAibDPiczQFbvhibPnGTavXbwNXtecvicyHRm85J3KKSSsskGpfA/0?wx_fmt=gif', // 分享图标
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                        layer.msg('分享成功!');
+                    },
+                    cancle: function(){
+                        layer.msg('用户取消了分享!');
+                    }
+                })
             })
         });
     </script>
