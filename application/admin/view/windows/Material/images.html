@@ -1,0 +1,75 @@
+<div class="col-md-12 col-sm-12 col-xs-12 material_count">
+    <button class="layui-btn">图片数量
+        <span class="layui-badge layui-bg-gray">{$image_count}</span>
+    </button>
+
+    <button class="layui-btn layui-btn-normal" id="addBtn">上传图片素材<i class="layui-icon"></i></button>
+</div>
+
+<link href="/ui/fileUpload/css/iconfont.css" rel="stylesheet" type="text/css" />
+<link href="/ui/fileUpload/css/fileUpload.css" rel="stylesheet" type="text/css">
+
+
+<div id="add" class="modal fade modal-body" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalPopoversLabel">上传照片</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="fileUploadContent" class="fileUploadContent"></div>
+                <!-- <button onclick="testUpload()">提交</button> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="startUpload">开始上传</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<script type="text/javascript" src="/ui/fileUpload/js/fileUpload.js"></script>
+<script type="text/javascript">
+    $('#addBtn').click(function () {
+        $('#add').modal('show');
+    })
+
+    $('#add').on('show.bs.modal', function (e) {
+        $('#add .uploadFileBt').css({display: 'none'});
+    })
+    $('#startUpload').click(function(){
+        $('.uploadFileBt')[0].click();
+    })
+
+    $("#fileUploadContent").initUpload({
+        "uploadUrl": "imagesUpload.html",//上传文件信息地址
+        "size": 2048,//文件大小限制，单位kb,默认不限制
+        "maxFileNumber":1,//文件个数限制，为整数
+        //"filelSavePath":"",//文件上传地址，后台设置的根目录
+        "beforeUpload": beforeUploadFun,//在上传前执行的函数
+        "onUpload": onUploadFun,//在上传后执行的函数
+        //autoCommit:true,//文件是否自动上传
+        "fileType": ['png', 'jpg', 'jpeg', 'gif', 'bmp']//文件类型限制，默认不限制，注意写的是文件后缀
+    });
+
+    function beforeUploadFun(opt) {
+        opt.otherData = [{ "name": "name", "value": "zxm" }];
+        console.log(opt);
+    }
+    function onUploadFun(opt, data) {
+        console.log(data);
+        uploadTools.uploadError(opt);//显示上传错误
+        uploadTools.uploadSuccess(opt);//显示上传成功
+    }
+
+	    // function testUpload(){
+	    // 	var opt = uploadTools.getOpt("fileUploadContent");
+	    // 	uploadEvent.uploadFileEvent(opt);
+	    // }
+
+</script>

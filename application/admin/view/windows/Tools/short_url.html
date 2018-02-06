@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>rebbitCms</title>
+    <link href="/ui/layui/css/layui.css" rel="stylesheet">
+ </head>
+<body class="layui-layout-body">
+<div class="layui-main"  style="width: 95%;">
+	<div class="layui-row">
+		<div class="layui-row" style="padding-top: 3em;"></div>
+		<div class="layui-row">
+			<div class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">长链接</label>
+					<div class="layui-input-block">
+						<input type="text" name="longurl" required  lay-verify="required" placeholder="长链接" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+				<div class="layui-form-item">
+					<label class="layui-form-label">短链接</label>
+					<div class="layui-input-block">
+						<input type="text" name="shorturl" readonly placeholder="短链接" class="layui-input">
+					</div>
+				</div>  
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit lay-filter="submit">开始转换</button>
+						<span class="layui-btn layui-btn-primary layui-back">取消</span>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+</body>
+<script type="text/javascript" src="/ui/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/ui/layui/layui.all.js"></script>
+<script type="text/javascript" src="/ui/layer.controller.js"></script>
+<script type="text/javascript" src="/page/Tools/short_url.js"></script>
+
+</html>

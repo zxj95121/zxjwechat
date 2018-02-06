@@ -1,0 +1,13 @@
+/* 素材数量Btn */
+.material_count{
+    margin-top: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.material_count button:first-child{
+    margin-left: 2%;
+}
+.material_count button:last-child{
+    margin-right: 2%;
+}

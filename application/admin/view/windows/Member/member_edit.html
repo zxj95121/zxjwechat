@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>rebbitCms</title>
+    <link href="/ui/layui/css/layui.css" rel="stylesheet">
+ </head>
+<body class="layui-layout-body">
+<div class="layui-main" style="width: 95%;">
+	<div class="layui-row">
+		<div class="layui-row" style="padding-top: 3em;"></div>
+		<div class="layui-row">
+			<div class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">头像</label>
+					<div class="layui-upload-list">
+					    <img class="layui-upload-img" id="avatar" style="height: 4em;width: 4em;">
+					    <p id="demoText"></p>
+					 </div>
+				</div> 
+				<div class="layui-form-item">
+					<label class="layui-form-label">用户名</label>
+					<div class="layui-input-block">
+						<input type="text" name="nickname" required  lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+				<div class="layui-form-item">
+					<label class="layui-form-label">openid</label>
+					<div class="layui-input-block">
+						<input type="text" name="openid" placeholder="openid" disabled class="layui-input">
+					</div>
+				</div> 
+				<div class="layui-form-item">
+				    <label class="layui-form-label">性别</label>
+				    <div class="layui-input-block">
+				      <input type="radio" name="gender" value="1" title="男">
+				      <input type="radio" name="gender" value="2" title="女">
+				      <input type="radio" name="gender" value="0" title="未知">
+				    </div>
+				</div>
+				<div class="layui-form-item">
+				    <label class="layui-form-label">分组</label>
+				    <div class="layui-input-block">
+				      <select name="groupid" lay-verify="required">
+
+				      </select>
+				    </div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">备注</label>
+					<div class="layui-input-block">
+						<textarea placeholder="备注" name="remark" style="resize: none;" class="layui-textarea"></textarea>
+					</div>
+				</div> 
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+						<span class="layui-btn layui-btn-primary layui-back">取消</span>
+						<!-- <button type="reset" class="layui-btn layui-btn-primary">重置</button> -->
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+</body>
+<script type="text/javascript" src="/ui/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/ui/jquery.url.js"></script>
+<script type="text/javascript" src="/ui/layui/layui.all.js"></script>
+<script type="text/javascript" src="/ui/layer.controller.js"></script>
+<script type="text/javascript" src="/page/Member/member_edit.js"></script>
+
+</html>

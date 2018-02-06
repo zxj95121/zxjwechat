@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>rebbitCms</title>
+    <link href="/ui/layui/css/layui.css" rel="stylesheet">
+ </head>
+<body class="layui-layout-body">
+<div class="layui-main"  style="width: 95%;">
+	<div class="layui-row">
+		<div class="layui-row" style="padding-top: 3em;"></div>
+		<div class="layui-row">
+			<div class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">用户名</label>
+					<div class="layui-input-block">
+						<input type="text" name="username" required  lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+						<input type="hidden" name="id" required  lay-verify="required">
+					</div>
+				</div> 
+				<div class="layui-form-item">
+					<label class="layui-form-label">密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" placeholder="密码" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+				 <div class="layui-form-item">
+				    <label class="layui-form-label">用户组</label>
+				    <div class="layui-input-block">
+				      <select name="groupid" id="groupid" lay-verify="required">
+				        <option value="0">无分组</option>
+				      </select>
+				    </div>
+				 </div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">备注</label>
+					<div class="layui-input-block">
+						<textarea placeholder="备注" name="remark" style="resize: none;" class="layui-textarea"></textarea>
+					</div>
+				</div> 
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+						<span class="layui-btn layui-btn-primary layui-back">取消</span>
+						<!-- <button type="reset" class="layui-btn layui-btn-primary">重置</button> -->
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+</body>
+<script type="text/javascript" src="/ui/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/ui/jquery.url.js"></script>
+<script type="text/javascript" src="/ui/layui/layui.all.js"></script>
+<script type="text/javascript" src="/ui/layer.controller.js"></script>
+<script type="text/javascript" src="/page/Index/edit_user.js"></script>
+
+</html>

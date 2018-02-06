@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* 添加按钮样式 */
+.cm_level{
+    height: 100%;
+}
+.cm_level2{
+    /* display: none; */
+    padding-left: 3rem;
+    border-left: 1px solid #3e3e3e;
+}
+
+/* 添加自定义菜单弹框样式 */
+.layui-form-item-custom-menu:nth-of-type(1){
+    padding-top: 15px;
+}
+.layui-form-item-custom-menu{
+    padding-right: 4%;
+}
+
+/* 弹出的内容，先都是隐藏 */
+.form-none{
+    display: none;
+}
+#body div[id^="layui-layer"] .layui-layer-content{
+    overflow-x: hidden;
+}
+
+#form1{
+    margin-top: 10px;
+}
+
+/* 菜单列表CSS */
+#menu1List, #menu2List{
+    width: 85%;
+    margin-top: 15px;
+}
+#menu1List li, #menu2List li{
+    font-size: 1em;
+    cursor: pointer;
+    line-height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#menu1List li span, #menu2List li span{
+    word-break: break-all;
+}
+#menu1List svg, #menu2List svg{
+    height: 20px;
+    width: 19px;
+}
+
+/* 发布部分 */
+#publishDiv{
+    margin-top: 30px;
+}
