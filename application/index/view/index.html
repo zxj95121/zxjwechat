@@ -68,10 +68,12 @@
                     imgUrl: 'https://mmbiz.qpic.cn/mmbiz_gif/a5Us7rpWGGqvn9HY2OoTC61CX0VzUreibuDkrEvrAibDPiczQFbvhibPnGTavXbwNXtecvicyHRm85J3KKSSsskGpfA/0?wx_fmt=gif', // 分享图标
                     success: function () {
                         // 用户确认分享后执行的回调函数
-                        layer.msg('分享成功!');
+                        // layer.msg('分享成功!');
+                        alert('分享成功');
                     },
                     cancle: function(){
-                        layer.msg('用户取消了分享!');
+                        // layer.msg('用户取消了分享!');
+                        alert('取消分享');
                     }
                 })
             })
