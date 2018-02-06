@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>rebbitCms</title>
+    <link rel="stylesheet" href="/ui/bootstrap/css/bootstrap.min.css">
+    <link href="/ui/bootstrap/octicons/lib/octicons.css" rel="stylesheet">
+    <link href="/ui/layui/css/layui.css" rel="stylesheet">
+    <link href="/page/Customize/index.css?v={:rand(1,1000)}" rel="stylesheet">
+</head>
+
+<body class="layui-layout-body" id="body">
+    <div class="layui-main" style="width: 95%;">
+        <div class="layui-row" id="account-list">
+            <div class="layui-row" style="padding-top: 2em;"></div>
+            <div class="layui-row">
+                <div class="layui-col-md5 layui-col-xs5 cm_level cm_level1">
+                    <div class="layui-btn layui-btn-normal addLevel1">添加一级菜单</div>
+
+                    <ul class="list-group" id="menu1List">
+                        {foreach $menu1 as $key => $value}
+                         {if $key == 0}
+                            <?php $pid = $value['id'];?>
+                         {/if}
+                        <li class="list-group-item {if $key == 0} active{/if}" mid="{$value['id']}">
+                            <span>{$value['name']}</span>
+                            <div class="deleteMenu">
+                                <svg height="32" class="octicon octicon-trashcan" viewBox="0 0 12 16" version="1.1" width="24" aria-hidden="true"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path></svg<svg height="32" class="octicon octicon-trashcan" viewBox="0 0 12 16" version="1.1" width="24" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path>
+                                </svg>
+                            </div>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+                <div class="layui-col-md7 layui-col-xs7 cm_level cm_level2">
+                    <div class="layui-btn layui-btn-normal addLevel2">添加二级菜单</div>
+                    <ul class="list-group" id="menu2List">
+                        {foreach $menu2 as $value}
+                            {if $value['pid'] == $pid}
+                            <li class="list-group-item" mid="{$value['id']}">
+                                <span>{$value['name']} / {if $value['type'] == 2} {$value['url']} {else} 发送消息 {/if}</span>
+                                <div class="deleteMenu">
+                                    <svg height="32" class="octicon octicon-trashcan" viewBox="0 0 12 16" version="1.1" width="24" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path>
+                                        </svg<svg height="32" class="octicon octicon-trashcan" viewBox="0 0 12 16" version="1.1" width="24" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path>
+                                    </svg>
+                                </div>
+                            </li>
+                            {/if}
+                        {/foreach}
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="layui-row" style="padding-top: 1em;" id="publishDiv">
+                <button type="button" class="btn btn-success col-md-6 offset-md-2">立即发布</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- layer层弹出的内容 -->
+    <div class="form-none" id="layui-form1">
+        <div class="row">
+            <form id="form1" class="col-xs-10 col-sm-10 col-md-10 offset-md-1 offset-xs-1 offset-sm-1" action="">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">菜单名称</span>
+                    </div>
+                    <input type="text" class="form-control" name="name-menu1" placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">菜单类型</font>
+                            </font>
+                        </label>
+                    </div>
+                    <select class="custom-select type-menu1" name="type-menu1">
+                        <option selected="">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">选择...</font>
+                            </font>
+                        </option>
+                        <option value="1">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">1、发送消息</font>
+                            </font>
+                        </option>
+                        <option value="2">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">2、跳转到URL</font>
+                            </font>
+                        </option>
+                    </select>
+                </div>
+                <div class="input-group mb-3" style="display: none;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">跳转的URL</span>
+                    </div>
+                    <input type="text" class="form-control" name="url-menu1" placeholder="url">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<style>
+    .layui-main .layui-nav-item a {
+        color: #333;
+    }
+
+    .layui-nav .layui-nav-item a:hover {
+        color: #6cc143;
+    }
+</style>
+<script>
+    var menu2 = JSON.parse('{$menu2_json}');
+    console.log(menu2);
+</script>
+<script type="text/javascript" src="/ui/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/ui/layui/layui.all.js"></script>
+<script type="text/javascript" src="/page/Customize/index.js?v={:rand(1,1000)}"></script>
+<script>
+</script>
+
+</html>

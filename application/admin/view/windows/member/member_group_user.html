@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>rebbitCms</title>
+    <link href="/ui/layui/css/layui.css" rel="stylesheet">
+ </head>
+<body class="layui-layout-body">
+<div class="layui-main"  style="width: 95%;">
+	<div class="layui-row" id="member-group-user-list">
+		<div class="layui-row" style="padding-top: 3em;"></div>
+		<div class="layui-row">
+			<div class="layui-col-md10">
+				<div id="member-group-user-list-page"></div>
+			</div>
+			<div class="layui-col-md2">
+				 <a style="float: right;" class="layui-btn layui-back">返回</a>
+				 <a style="float: right;">&nbsp;</a>
+				 <a style="float: right;" class="layui-btn" id="synchMember">同步用户</a>
+			</div>
+		</div>
+		<div class="layui-row" style="padding-top: 1em;"></div>
+		<div class="layui-row" id="member-group-user-list-data">
+			
+		</div>
+	</div>
+</div>
+</body>
+<style>
+	.layui-main .layui-nav-item a{
+		color: #333;
+	}
+	.layui-nav .layui-nav-item a:hover{
+		color: #6cc143;
+	}
+</style>
+<script type="text/javascript" src="/ui/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/ui/jquery.url.js"></script>
+<script type="text/javascript" src="/ui/layui/layui.all.js"></script>
+<script type="text/javascript" src="/page/Member/member_group_user.js"></script>
+<script></script>
+</html>
