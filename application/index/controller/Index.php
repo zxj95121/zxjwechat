@@ -4,8 +4,8 @@ namespace app\index\controller;
 use think\Session;
 use think\Weixin;
 
-use app\common\controller\Backend;
-class Index extends Backend
+use app\common\controller\FrontBase;
+class Index extends FrontBase
 {
     private $account_id;
     public function __construct()
