@@ -13,16 +13,19 @@
         .row_div{
             margin-top: 16px;
         }
+        .row_div div{
+            line-height: 38px;
+        }
     </style>
 </head>
 <body>
     <div class="row row_div">
         <div class="col-sm-1 offset-sm-1">1、</div>
-        <button id="scan" class="btn btn-success col-sm-6 offset-sm-2">点击扫描二维码</button>
+        <button id="scan" class="btn btn-success col-sm-6">点击扫描二维码</button>
     </div>
     <div class="row row_div">
         <div class="col-sm-1 offset-sm-1">2、</div>
-        <button id="share" class="btn btn-success col-sm-6 offset-sm-2">分享到朋友圈</button>
+        <button id="share" class="btn btn-success col-sm-6">分享到朋友圈</button>
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="/ui/jquery-2.2.4.min.js"></script>
