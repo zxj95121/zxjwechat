@@ -100,6 +100,10 @@
         <div class="number">3、</div>
         <button id="position" class="btn btn-success">获取用户地理位置</button>
     </div>
+    <div class="row_div">
+        <div class="number">4、</div>
+        <button id="voice" class="btn btn-success">点我开始录音</button>
+    </div>
 
     <div class="div-photo" style="position: relative;">
         <div class="pdiv addphoto" style="height: 91px; margin-right: 6px; margin-left: 3px;">
@@ -130,8 +134,10 @@
                 'onMenuShareQZone',
                 'getLocation',
                 'chooseImage',
-                'uploadImage',
-                'getLocalImgData'
+                'getLocalImgData',
+                'startRecord',
+                'stopRecord',
+                'playVoice'
 
             ] // 必填，需要使用的JS接口列表
         });
@@ -356,6 +362,23 @@
                 }
 
             });
+        })
+
+        /* 录音 */
+        $('#voick').click(function(){
+            wx.startRecord();
+
+            停止录音接口
+            setTimeout(function(){
+                wx.stopRecord({
+                    success: function (res) {
+                        var localId = res.localId;
+                        wx.playVoice({
+                            localId: localId // 需要播放的音频的本地ID，由stopRecord接口获得
+                        });
+                    }
+                })
+            }, 3000);
         })
     </script>
 </body>
