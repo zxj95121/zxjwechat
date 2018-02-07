@@ -368,7 +368,7 @@
         $('#voice').click(function(){
             var start = $(this).attr('start');
             var dom = $(this);
-            if (!start) {
+            if (start == 0) {
                 wx.startRecord();
                 $(this).attr('start', 1);
             } else {
