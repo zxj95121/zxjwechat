@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/ui/bootstrap/css/bootstrap.min.css">
     <link href="/ui/layui/css/layui.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://dev.dcloud.net.cn/mui/dist/css/mui.min.css">
     <style>
         button{
             cursor: pointer;
@@ -272,39 +271,6 @@
                 }
             })
 
-
-            /*返回上一页*/
-            $('.i_prev_url').click(function () {
-                history.back();
-            })
-
-
-
-            //	$('.addphoto').click(function() {
-            //		$('#file')[0].click();
-            //	})
-
-            //点击删除照片
-            $(document).on('click', '.i-del', function (e) {
-
-                var currentIndex = $(this).index('.i-del');
-                layer.confirm('确认删除第 ' + (currentIndex + 1) + ' 张图片吗？', {
-                    btn: ['确认', '取消'] //按钮
-                }, function (index) {
-                    var img_nums = $(".pdiv").length;
-                    if (img_nums == 10) {
-                        $('.addphoto').show();
-                    }
-                    $('.photo:eq(' + currentIndex + ')').remove();
-                    layer.close(index);
-                    setMargin();
-                    currentIndex = -1;
-                }, function (index) {
-                    layer.close(index);
-                    currentIndex = -1;
-                });
-                e.stopPropagation();
-            })
         })
 
         function setMargin() {
@@ -312,19 +278,6 @@
             $('.pdiv').css('height', imgWidth + 'px');
 
             var spaceWidth = parseInt(($('.div-photo').width() - 3 * imgWidth) / 3);
-            // $('.pdiv:gt(2)').css('marginTop', spaceWidth+'px');
-            // // 左右边距
-            // $('.pdiv').each(function(){
-            // 	var index = parseInt($(this).index('.pdiv'))%3;
-            // 	if (index < 2) {
-            // 		$(this).css('marginRight', spaceWidth+'px');
-            // 	}
-            // 	if (index < 1){
-            // 		$(this).css('marginLeft', 0.5*spaceWidth+'px');
-            // 	}
-            // })
-
-            // $('.addphoto').css({'marginRight': '0px', 'marginLeft': '0px'});
 
             /*检查当前照片个数*/
             var size = parseInt($('.photo').size());
@@ -351,7 +304,7 @@
 
         var u = navigator.userAgent;
         isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-
+        
         $('.addphoto').click(function () {
             wx.chooseImage({
 
