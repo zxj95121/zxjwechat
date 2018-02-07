@@ -13,21 +13,45 @@
         }
         .row_div{
             margin-top: 16px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
         }
         .row_div div{
             line-height: 38px;
             text-align: right;
         }
+        #shareDiv{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background: #0a0a0a;
+            opacity: 0.8;
+            font-size: 3em;
+        }
+        #sahreDiv span{
+            width: 85%;
+        }
     </style>
 </head>
 <body>
-    <div class="row row_div">
-        <div class="col col-sm-1 offset-sm-1 col-xs-2 offset-xs-1">1、</div>
+    <div class="row_div">
+        <div class="number">1、</div>
         <button id="scan" class="btn col btn-success col-sm-6 col-xs-8">点击扫描二维码</button>
     </div>
     <div class="row row_div">
-        <div class="col-sm-1 col offset-sm-1 col-xs-2 offset-xs-1">2、</div>
+        <div class="number">2、</div>
         <button id="share" class="btn col btn-success col-sm-6 col-xs-8">分享到朋友圈</button>
+    </div>
+
+    <div id="shareDiv">
+        <span>点击右上角分享</span>
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="/ui/jquery-2.2.4.min.js"></script>
@@ -94,6 +118,10 @@
                     layer.msg('用户取消了分享!');
                 }
             });
+        })
+
+        $('#shareDiv').click(function(){
+            $(this).hide(400);
         })
     </script>
 </body>
