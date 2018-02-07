@@ -23,11 +23,11 @@
 <body>
     <div class="row row_div">
         <div class="col-sm-1 offset-sm-1 col-xs-2 offset-xs-1">1、</div>
-        <button id="scan" class="btn btn-success col-sm-6 col-xs-8">点击扫描二维码</button>
+        <div id="scan" class="btn btn-success col-sm-6 col-xs-8">点击扫描二维码</div>
     </div>
     <div class="row row_div">
         <div class="col-sm-1 offset-sm-1 col-xs-2 offset-xs-1">2、</div>
-        <button id="share" class="btn btn-success col-sm-6 col-xs-8">分享到朋友圈</button>
+        <div id="share" class="btn btn-success col-sm-6 col-xs-8">分享到朋友圈</div>
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="/ui/jquery-2.2.4.min.js"></script>
@@ -60,8 +60,9 @@
                     }
                 });
             })
-
+            
             $('#share').click(function(){
+                alert('hehe');
                 wx.onMenuShareTimeline({
                     title: '分享到朋友圈', // 分享标题
                     link: 'http://small.zhangxianjian.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
