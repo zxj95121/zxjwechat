@@ -165,9 +165,13 @@
                     var accuracy = res.accuracy; // 位置精度
 
                     $.ajax({
-                        url: 'http://api.map.baidu.com/geocoder?location='+latitude+','+longitude+'&output=json&key=aibHOrzNpo585L0P3HIa3lGK',
+                        url: 'getPosition.html',
                         type: 'get',
                         dataType: 'json',
+                        data: {
+                            lat: latitude,
+                            long: longitude
+                        },
                         success: function(data) {
                             if (data.status == 'OK') {
                                 layer.msg(data.result.formatted_address);
