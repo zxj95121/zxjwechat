@@ -34,6 +34,7 @@
             background: #0a0a0a;
             opacity: 0.8;
             font-size: 3em;
+            display: 'none';
         }
         #sahreDiv span{
             width: 85%;
@@ -43,11 +44,11 @@
 <body>
     <div class="row_div">
         <div class="number">1、</div>
-        <button id="scan" class="btn col btn-success col-sm-6 col-xs-8">点击扫描二维码</button>
+        <button id="scan" class="btn btn-success">点击扫描二维码</button>
     </div>
-    <div class="row row_div">
+    <div class="row_div">
         <div class="number">2、</div>
-        <button id="share" class="btn col btn-success col-sm-6 col-xs-8">分享到朋友圈</button>
+        <button id="share" class="btn btn-success">点击分享到朋友圈</button>
     </div>
 
     <div id="shareDiv">
@@ -87,40 +88,41 @@
                 }
             });
         })
+
+        wx.onMenuShareAppMessage({
+            title: '发送给朋友', // 分享标题
+            desc: '卖命的share', // 分享描述
+            link: 'http://small.zhangxianjian.com/windows/Admin/login', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: 'https://mmbiz.qpic.cn/mmbiz_gif/a5Us7rpWGGqvn9HY2OoTC61CX0VzUreibuDkrEvrAibDPiczQFbvhibPnGTavXbwNXtecvicyHRm85J3KKSSsskGpfA/0?wx_fmt=gif', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                layer.msg('发送给朋友成功!');
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+                layer.msg('用户取消了发送给朋友!');
+            }
+        });
         
+        wx.onMenuShareTimeline({
+            title: '分享到朋友圈', // 分享标题
+            link: 'http://small.zhangxianjian.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: 'https://mmbiz.qpic.cn/mmbiz_gif/a5Us7rpWGGqvn9HY2OoTC61CX0VzUreibuDkrEvrAibDPiczQFbvhibPnGTavXbwNXtecvicyHRm85J3KKSSsskGpfA/0?wx_fmt=gif', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                // layer.msg('分享成功!');
+                alert('分享到朋友圈成功');
+            },
+            cancle: function(){
+                // layer.msg('用户取消了分享!');
+                alert('取消分享到朋友圈');
+            }
+        })
         $('#share').click(function(){
-            // wx.onMenuShareTimeline({
-            //     title: '分享到朋友圈', // 分享标题
-            //     link: 'http://small.zhangxianjian.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            //     imgUrl: 'https://mmbiz.qpic.cn/mmbiz_gif/a5Us7rpWGGqvn9HY2OoTC61CX0VzUreibuDkrEvrAibDPiczQFbvhibPnGTavXbwNXtecvicyHRm85J3KKSSsskGpfA/0?wx_fmt=gif', // 分享图标
-            //     success: function () {
-            //         // 用户确认分享后执行的回调函数
-            //         // layer.msg('分享成功!');
-            //         alert('分享成功');
-            //     },
-            //     cancle: function(){
-            //         // layer.msg('用户取消了分享!');
-            //         alert('取消分享');
-            //     }
-            // })
-            console.log('触发了函数');
-            wx.onMenuShareAppMessage({
-                title: '发送给朋友', // 分享标题
-                desc: '卖命的share', // 分享描述
-                link: 'http://small.zhangxianjian.com/windows/Admin/login', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                imgUrl: 'https://mmbiz.qpic.cn/mmbiz_gif/a5Us7rpWGGqvn9HY2OoTC61CX0VzUreibuDkrEvrAibDPiczQFbvhibPnGTavXbwNXtecvicyHRm85J3KKSSsskGpfA/0?wx_fmt=gif', // 分享图标
-                success: function () {
-                    // 用户确认分享后执行的回调函数
-                    layer.msg('分享成功!');
-                },
-                cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                    layer.msg('用户取消了分享!');
-                }
-            });
+            $('#shareDiv').css({ "display": 'block', 'opacity': '0.8' });
         })
 
-        $('#shareDiv').click(function(){
+        $('#shareDiv').toggle(function(){
             $(this).hide(400);
         })
     </script>
