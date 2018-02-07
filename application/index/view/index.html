@@ -39,6 +39,52 @@
         #sahreDiv span{
             width: 85%;
         }
+
+        /* 图像部分 */
+        .div-photo{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid #b9b9ae;
+        }
+        .photo div{
+            top: 0.1rem;
+            right: 0.1rem;
+            background: #777;
+            opacity: 0.8;
+            cursor: pointer;
+            position: absolute;
+            z-index: 2;
+        }
+        .photo div i{
+            color: #FFF;
+            font-size: 1.8rem;
+        }
+        .pdiv{
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 31.33%;
+            background-color: #F0F;
+            /*display: flex;*/
+        }
+        /*发照片按钮*/
+        .addphoto{
+            background: #F2F2F2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #b9b9ae;
+            cursor: pointer;
+        }
+        .addphoto img {
+            width: 30%;
+        }
     </style>
 </head>
 <body>
@@ -53,6 +99,13 @@
     <div class="row_div">
         <div class="number">3、</div>
         <button id="position" class="btn btn-success">获取用户地理位置</button>
+    </div>
+
+    <div class="div-photo" style="position: relative;">
+        <div class="pdiv addphoto" style="height: 91px; margin-right: 6px; margin-left: 3px;">
+            <img src="/ui/front-ui/images/basic/carema200.png">
+            <span>照片</span>
+        </div>
     </div>
 
     <div id="shareDiv">
@@ -75,7 +128,11 @@
                 'onMenuShareAppMessage',
                 'onMenuShareQQ',
                 'onMenuShareQZone',
-                'getLocation'
+                'getLocation',
+                'chooseImage',
+                'uploadImage',
+                'getLocalImgData'
+
             ] // 必填，需要使用的JS接口列表
         });
 
@@ -192,6 +249,157 @@
 
         $('#shareDiv').click(function(){
             $(this).hide(400);
+        })
+
+        /* photo */
+        $(function () {
+            var imgWidth = $('.pdiv:eq(0)').width();
+            $('.pdiv').css('height', imgWidth + 'px');
+
+            var spaceWidth = parseInt(($('.div-photo').width() - 3 * imgWidth) / 3);
+
+            //上边距
+            $('.pdiv:gt(2)').css('marginTop', spaceWidth + 'px');
+            // 左右边距
+            $('.pdiv').each(function () {
+                var index = parseInt($(this).index('.pdiv')) % 3;
+                if (index < 2) {
+                    $(this).css('marginRight', spaceWidth + 'px');
+                }
+                if (index < 1) {
+                    $(this).css('marginLeft', 0.5 * spaceWidth + 'px');
+                }
+            })
+
+
+            /*返回上一页*/
+            $('.i_prev_url').click(function () {
+                history.back();
+            })
+
+
+
+            //	$('.addphoto').click(function() {
+            //		$('#file')[0].click();
+            //	})
+
+            //点击删除照片
+            $(document).on('click', '.i-del', function (e) {
+
+                var currentIndex = $(this).index('.i-del');
+                layer.confirm('确认删除第 ' + (currentIndex + 1) + ' 张图片吗？', {
+                    btn: ['确认', '取消'] //按钮
+                }, function (index) {
+                    var img_nums = $(".pdiv").length;
+                    if (img_nums == 10) {
+                        $('.addphoto').show();
+                    }
+                    $('.photo:eq(' + currentIndex + ')').remove();
+                    layer.close(index);
+                    setMargin();
+                    currentIndex = -1;
+                }, function (index) {
+                    layer.close(index);
+                    currentIndex = -1;
+                });
+                e.stopPropagation();
+            })
+        })
+
+        function setMargin() {
+            var imgWidth = $('.pdiv:eq(0)').width();
+            $('.pdiv').css('height', imgWidth + 'px');
+
+            var spaceWidth = parseInt(($('.div-photo').width() - 3 * imgWidth) / 3);
+            // $('.pdiv:gt(2)').css('marginTop', spaceWidth+'px');
+            // // 左右边距
+            // $('.pdiv').each(function(){
+            // 	var index = parseInt($(this).index('.pdiv'))%3;
+            // 	if (index < 2) {
+            // 		$(this).css('marginRight', spaceWidth+'px');
+            // 	}
+            // 	if (index < 1){
+            // 		$(this).css('marginLeft', 0.5*spaceWidth+'px');
+            // 	}
+            // })
+
+            // $('.addphoto').css({'marginRight': '0px', 'marginLeft': '0px'});
+
+            /*检查当前照片个数*/
+            var size = parseInt($('.photo').size());
+            if (size >= 9) {
+                $('.addphoto').css('display', 'none');
+                size--;
+            }
+
+
+            $('.pdiv').css('position', 'absolute');
+            $('.pdiv').each(function () {
+                var index = parseInt($(this).index('.pdiv'));
+                if (index > 8) {
+                    return;
+                }
+
+                var top = (spaceWidth + imgWidth) * parseInt(index / 3);
+                var left = ((index % 3) * imgWidth) + ((index % 3) + 0.5) * spaceWidth;
+                $(this).css({ top: top + 'px', left: left + 'px' });
+            })
+
+            $('.div-photo').css('height', '' + (parseInt(size / 3) + 1) * (imgWidth + spaceWidth) + 'px');
+        }
+
+
+        $('.addphoto').click(function () {
+            wx.chooseImage({
+
+                count: 9, // 默认9
+
+                sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+
+                success: function (res) {
+
+                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+
+                    var num = parseInt($('.pdiv').size()) - 1;
+
+                    var len = 0;
+                    //				        var i = ;
+                    var ci = 0;
+                    var carr = [];
+                    $.each(localIds, function (index, item) {
+                        //							alert(item+'----');
+                        len++;
+                        if (num + len >= 10) {
+                            $('.addphoto').css('display', 'none');
+                            return;
+                        }
+                        carr[carr.length] = item;
+
+                        if (isAndroid) {
+                            $('.addphoto').before('<div class="pdiv photo" src="' + item + '" style="background-image:url(' + item + ');"><div><i class="mui-icon mui-icon-closeempty i-del"></i></div><img style="width: 100%;height: 100%;opacity: 0;" class="mui-media-object" src="' + item + '" data-preview-src="" data-preview-group="1"></div>');
+                        } else {
+                            wx.getLocalImgData({
+
+                                localId: item, // 图片的localID
+
+                                success: function (data) {
+                                    //										alert(carr[ci]);
+                                    var localData = data.localData; // localData是图片的base64数据，可以用img标签显示
+                                    $('.addphoto').before('<div class="pdiv photo" src="' + carr[ci] + '" style="background-image:url(' + localData + ');"><div><i class="mui-icon mui-icon-closeempty i-del"></i></div><img style="width: 100%;height: 100%;opacity: 0;" class="mui-media-object" src="' + localData + '" data-preview-src="" data-preview-group="1"></div>');
+                                    ci = ci + 1;
+                                    setMargin();
+                                }
+
+                            });
+                        }
+                    });
+
+                    setMargin();
+                }
+
+            });
         })
     </script>
 </body>
